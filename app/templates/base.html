@@ -9,6 +9,10 @@
 {% endblock head %}
 
 {% block body %}
-    {% block content %}{% endblock content %}
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    <script src="{{ url_for('static', filename='javascript/bootstrap.min.js') }}"></script>
 {% endblock body %}
 </html>
