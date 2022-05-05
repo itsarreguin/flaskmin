@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ super() }} | Login{% endblock title %}
+
+{% block content %}
+    <div class="full flex flex-y flex-x">
+        <section class="form-container w-500">
+            <div class="form-header">
+                <h3>Admin Login</h3>
+            </div>
+            <form class="form form-login" action="{{ url_for('auth.login') }}" method="post">
+                {{ form.username(class="form-control", placeholder="Username") }}
+        
+                {{ form.password(class="form-control", placeholder="Password") }}
+        
+                <div class="d-grid gap-2">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </section>
+    </div>
+{% endblock content %}
