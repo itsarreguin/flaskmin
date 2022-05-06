@@ -1,2 +1,31 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} | SignUp{% endblock title %}
+{% block title %}{{ super() }} | Sign Up{% endblock title %}
+
+{% block content %}
+    <div class="full row">
+        <section class="col-4"></section>
+        <section class="col-8 flex flex-y flex-x">
+            <div class="form-container w-580">
+                <section class="form-header"><h3>Admin register</h3></section>
+
+                <form class="d-grid gap-4" action="{{ url_for('auth.signup') }}" method="post">
+                    <div class="input-group">
+                        {{ form.first_name(class="form-control", placeholder="First name") }}
+                        {{ form.last_name(class="form-control", placeholder="Last name") }}
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                        {{ form.username(class="form-control", placeholder="Username") }}
+                    </div>
+                    {{ form.email(class="form-control", placeholder="E-mail address") }}
+                    {{ form.password_hash(class="form-control", placeholder="Password") }}
+                    {{ form.password_verify(class="form-control", placeholder="Verify your password") }}
+
+                    <section class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </section>
+                </form>
+            </div>
+        </section>
+    </div>
+{% endblock content %}

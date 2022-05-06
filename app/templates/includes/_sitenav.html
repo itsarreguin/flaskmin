@@ -1,22 +1,22 @@
-<nav class="nav fixed-top">
-    <div class="nav-center">
-        <section class="nav-col">
-            <a class="nav-brand" href="{{ url_for('main.index') }}"></a>
+<nav class="nav flex flex-y flex-x fixed-top">
+    <div class="nav-center flex">
+        <section class="nav-col flex flex-y">
+            <a class="nav-brand" href="{{ url_for('main.index') }}">Flaskmin</a>
         </section>
-        <section class="nav-col">
-            <ul class="nav-list">
-                <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
+        <section class="nav-col flex end">
+            <ul class="nav-list flex">
+                <li class="nav-li-item"><a class="nav-link" href="">Contact</a></li>
                 <li class="nav-li-item">
-                    <a class="nav-link" target="_blank" href=""></a>
+                    <a class="nav-link" target="_blank" href="">Twitter</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" target="_blank" href=""></a>
+                <li class="nav-li-item">
+                    <a class="nav-link" target="_blank" href="">GitHub</a>
                 </li>
-                <li class="nav-item">
-                    <a class="" href="{{ url_for('auth.login') }}">Login</a>
+                <li class="nav-li-item">
+                    <a class="btn btn-outline-primary" href="{{ url_for('auth.login') }}">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="" href="{{ url_for('auth.signup') }}">Sign Up</a>
+                <li class="nav-li-item">
+                    <a class="btn btn-primary ms-2" href="{{ url_for('auth.signup') }}">Sign Up</a>
                 </li>
             </ul>
         </section>

@@ -1,3 +1,10 @@
+a{
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}
+
 .flex {
     display: flex;
 }
@@ -10,9 +17,34 @@
     justify-content: center;
 }
 
+.start {
+    justify-content: flex-start;
+}
+
+.end {
+    justify-content: flex-end;
+}
+
 .full {
     width: 100%;
     height: 100vh;
+}
+
+.nav {
+    width: 100%;
+    height: 74px;
+    border-bottom: 1px solid #bebebe;
+    padding: 0px 6%;
+    background: #FFFFFF;
+}
+
+.nav-center {
+    width: 100%;
+    height: 30px;
+}
+
+.nav-col {
+    width: 50%;
 }
 
 .form-container {
@@ -20,20 +52,20 @@
     padding: 40px 50px;
     border: 1px solid #bebebe;
     border-radius: 8px;
+    background: #FFFFFF;
 }
 .form-header {
     width: 100%;
     text-align: center;
-    margin-bottom: 25px;
-}
-
-.form-login input[type="text"],
-.form-login input[type="password"] {
-    margin-bottom: 25px;
+    margin-bottom: 35px;
 }
 
 .w-500 {
     max-width: 500px;
+}
+
+.w-580 {
+    max-width: 580px;
 }
 
 .mr-r {
