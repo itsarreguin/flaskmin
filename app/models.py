@@ -2,15 +2,25 @@
 
 from datetime import datetime
 
-from sqlalchemy import Column, String, Integer, DateTime
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 
 from werkzeug.security import (generate_password_hash,
     check_password_hash
     )
 
+from db.engine import postgresql
+from db.engine import Base
+from db.settings import postgres
 
-Base = declarative_base()
+
+engine = postgresql(
+    username=postgres['user'],
+    password=postgres['password'],
+    host=postgres['host'],
+    port=postgres['port'],
+    db=postgres['db_name']
+)
 
 
 class Admin(Base):

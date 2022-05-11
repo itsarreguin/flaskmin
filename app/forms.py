@@ -31,5 +31,9 @@ class AdminProfile(Form):
     pass
 
 
-class Employee(Form):
-    pass
+class EmployeeForm(Form):
+    first_name = StringField('First name', validators=[DataRequired()])
+    last_name = StringField('Last name', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email address', validators=[DataRequired()])
+    submit = SubmitField(label='Add employee')

@@ -1,2 +1,37 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} | Home{% endblock title %}
+{% block title %}{{ super() }} | Dashboard{% endblock title %}
+
+
+{% block content %}
+    <br><br><br><br>
+    <a class="btn btn-primary" href="{{ url_for('admin.new_employee') }}">Add employee</a>
+    <br><br>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Username</th>
+                <th scope="col">E-mail address</th>
+                <th scope="col">Created date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td scope="row">{{ employee.id }}</td>
+                    <td>{{ employee.first_name | capitalize }}</td>
+                    <td>{{ employee.last_name | capitalize }}</td>
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.created_at }}</td>
+                    <td>
+                        <a class="btn btn-light btn-sm" href="">Edit data</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
