@@ -18,10 +18,11 @@ class SignUpForm(Form):
     last_name = StringField('Second name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
     email = EmailField('Your e-mail address', validators=[DataRequired()])
-    password_hash = PasswordField('Create a password', validators=[DataRequired()])
+    password_hash = PasswordField(
+        'Create a password',
+        validators=[DataRequired(), EqualTo('password_hash', message='Passwords do not match')])
     password_verify = PasswordField(
-        'Verify your password',
-        validators=[DataRequired(),EqualTo(password_hash, message='Passwords do not match')]
+        'Verify your password', validators=[DataRequired()]
     )
     submit = SubmitField('Register')
 

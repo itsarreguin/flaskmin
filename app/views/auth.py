@@ -3,6 +3,7 @@
 from flask import Blueprint
 from flask import request, render_template, redirect, url_for
 
+from app.models import Admin
 from app.forms import LoginForm, SignUpForm
 
 
