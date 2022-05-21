@@ -9,26 +9,15 @@ from werkzeug.security import (generate_password_hash,
     check_password_hash
     )
 
-from db.engine import postgresql
 from db.engine import Base
-from db.settings import postgres
-
-
-engine = postgresql(
-    username=postgres['user'],
-    password=postgres['password'],
-    host=postgres['host'],
-    port=postgres['port'],
-    db=postgres['db_name']
-)
 
 
 class Admin(Base):
     __tablename__ = 'admins'
     
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(100), nullable=False)
-    last_name = Column(String(100), nullable=False)
+    first_name = Column(String(50), nullable=False)
+    last_name = Column(String(50), nullable=True)
     username = Column(String(20), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
     password_hash = Column(String(100))
@@ -41,8 +30,8 @@ class Employee(Base):
     __tablename__ = 'employees'
     
     id = Column(Integer, primary_key=True)
-    first_name = Column(String(100), nullable=False)
-    last_name = Column(String(100), nullable=False)
+    first_name = Column(String(50), nullable=False)
+    last_name = Column(String(50), nullable=False)
     username = Column(String(20), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
     created_at = Column(DateTime(), default=datetime.utcnow())

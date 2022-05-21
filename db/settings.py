@@ -1,12 +1,26 @@
-from typing import Dict
+from sqlalchemy.orm import scoped_session, sessionmaker
 
-DictTypes = Dict[str, str | int]
+from db.engine import postgresql, Base
 
 
-postgres: DictTypes = {
-    'user': 'itsarreguin',
-    'password': 'adreno',
-    'host': 'localhost',
-    'port': 5432,
-    'db_name': 'flaskmin',
-}
+engine = postgresql(
+    username='itsarreguin',
+    password='adreno',
+    host='localhost',
+    port=5432,
+    database='flaskmin'
+)
+
+db_session = scoped_session(
+    sessionmaker(
+        autocommit=False, autoflush=False, bind=engine
+    )
+)
+
+
+Base.query = db_session.query_property()
+
+
+def init_db():
+    from app import models
+    Base.metadata.create_all(bind=engine)

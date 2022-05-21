@@ -3,14 +3,14 @@
 from flask import Flask
 
 from app.config import DevConfig
-from app.models import engine
+from db.settings import db_session
+
 
 
 def main_core():
     app = Flask(__name__)
 
     app.config.from_object(DevConfig)
-    app.config['SQLALCHEMY_DATABASE_URI'] = engine
 
 
     """Register all project blueprints to access routes"""
@@ -25,3 +25,11 @@ def main_core():
 
 
     return app
+
+
+app = main_core()
+
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()

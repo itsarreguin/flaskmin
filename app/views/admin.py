@@ -13,7 +13,16 @@ mod = Blueprint('admin', __name__)
 
 @mod.route('/dashboard/')
 def dashboard():
+    context = {
+        'employees': Employee()
+    }
+
     return render_template('admin/dashboard.html')
+
+
+@mod.route('/dashboard')
+def dashboard_redirect():
+    return redirect(url_for('admin.dashboard'))
 
 
 @mod.route('/employee/add/')

@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Flaskmin{% endblock title %}</title>
+    <title>{% block title %}Flaskmin{% endblock %}</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-{% endblock head %}
+{% endblock %}
 
 {% block body %}
-    {% include 'includes/_navbar.html' %}
+    {% block navbar %}
+        {% include 'includes/_navbar.html' %}
+    {% endblock %}
 
     <main class="container-fluid">
-        {% block content %}{% endblock content %}
+        {% block content %}{% endblock%}
     </main>
 
     <script src="{{ url_for('static', filename='javascript/bootstrap.min.js') }}"></script>
-{% endblock body %}
+{% endblock %}
 </html>
