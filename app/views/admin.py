@@ -35,30 +35,25 @@ def new_employee():
         username = form.username.data
         email = form.email.data
         
-        employee = db_session.query(Employee).filter(Employee.username == username)
+        employee = db_session.query(Employee).filter(Employee.username == username).first()
         
         if not employee:
             new_employee = Employee(
-                firstname = first_name,
-                lastname = last_name,
+                first_name = first_name,
+                last_name = last_name,
                 username = username,
                 email = email
             )
-            
-            try:
-                db_session.add(new_employee)
-                db_session.commit()
 
-                flash(f'{first_name} added successfully')
-                
-                return redirect(url_for('admin.dashboard'))
-            
-            except:
-                flash('Creation error. Try again')
-                return redirect(url_for('admin.dashboard'))
+            db_session.add(new_employee)
+            db_session.commit()
+
+            flash(f'{first_name} added successfully')
+
+            return redirect(url_for('admin.dashboard'))
 
         else:
-            flash('Employee already exist')
+            flash('Employee username already exist')
 
     return render_template('admin/add_employee.html', form=form)
 
@@ -69,8 +64,14 @@ def edit_employee(username: str):
 
 
 @mod.route('/employee/<username>/delete/')
-def delete_emplyee(username: str):
-    pass
+def delete_employee(username: str):
+    db_session.query(Employee).filter(Employee.username == username).delete()
+
+    db_session.commit()
+
+    flash(f'{username.capitalize()} was deleted correctly')
+
+    return redirect(url_for('admin.dashboard'))
 
 
 @mod.route('/logout/')

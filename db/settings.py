@@ -24,3 +24,13 @@ Base.query = db_session.query_property()
 def init_db():
     from app import models
     Base.metadata.create_all(bind=engine)
+
+
+def cls_db():
+    from app import models
+    Base.metadata.create_all(bind=engine)
+
+
+def drop_db():
+    from app import models
+    Base.metadata.drop_all(bind=engine)

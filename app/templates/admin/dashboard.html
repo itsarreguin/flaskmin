@@ -2,13 +2,10 @@
 {% block title %}{{ super() }} | Dashboard{% endblock %}
 {% block navbar %}{{ super() }}{% endblock %}
 {% block content %}
-    <section class="container">
-        
-    </section>
-    <section class="container d-grid gap-4" style="margin-top: 100px;">
+    <section class="container d-grid gap-4" style="margin-top: 180px;">
         {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <h5 class="mb-0">{{ message }}</h5>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h6 class="mb-0">{{ message }}</h6>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endfor %}
@@ -35,6 +32,7 @@
                         <th scope="col">Username</th>
                         <th scope="col">E-mail address</th>
                         <th scope="col">Created date</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,6 +44,7 @@
                             <td>{{ employee.username }}</td>
                             <td>{{ employee.email }}</td>
                             <td>{{ employee.created_at }}</td>
+                            <td><a class="btn btn-danger" href="{{ url_for('admin.delete_employee', username=employee.username) }}">Delete</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

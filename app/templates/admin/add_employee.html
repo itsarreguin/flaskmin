@@ -1,16 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}{{ super() }} | Add new employee{% endblock title %}
-{% block navbar %}{% endblock %}
+{% block navbar %}{{ super() }}{% endblock %}
 {% block content %}
-    <div class="full flex flex-y flex-x">
-        <form action="" method="post">
-            {{ form.first_name(class="form-control", placeholder="First name") }}
-            {{ form.last_name(class="form-control", placeholder="Last name") }}
-            {{ form.username(class="form-control", placeholder="Username") }}
-            {{ form.email(class="form-control", placeholder="E-mail address") }}
-            
-            {{ form.submit(class="btn btn-primary") }}
-            <a class="btn btn-danger" href="{{ url_for('admin.dashboard') }}">Cancel</a>
-        </form>
+    <div class="fullview d-flex justify-content-center align-items-center">
+        <section class="container d-flex justify-content-center align-items-center">
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <h5 class="mb-0">{{ message }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+            <div class="form-container w-500">
+                <section class="form-header"><h3>Add employee</h3></section>
+                <form action="" method="post" class="d-grid gap-4">
+                    {{ form.first_name(class="form-control", placeholder="First name") }}
+                    {{ form.last_name(class="form-control", placeholder="Last name") }}
+                    {{ form.username(class="form-control", placeholder="Username") }}
+                    {{ form.email(class="form-control", placeholder="E-mail address") }}
+                    
+                    {{ form.submit(class="btn btn-primary") }}
+                    <a class="btn btn-danger" href="{{ url_for('admin.dashboard') }}">Cancel</a>
+                </form>
+            </div>
+        </section>
     </div>
 {% endblock content %}
