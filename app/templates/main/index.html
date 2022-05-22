@@ -1,8 +1,4 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} | The admin app{% endblock title %}
-
-{% block navbar %}
-    {% include 'includes/_sitenav.html' %}
-{% endblock navbar %}
-
-{% block content %}{% endblock content %}
+{% block title %}{{ super() }} | The admin app{% endblock %}
+{% block navbar %}{{ super() }}{% endblock %}
+{% block content %}{% endblock %}

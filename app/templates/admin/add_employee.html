@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}{{ super() }} | Add new employee{% endblock title %}
-
+{% block navbar %}{% endblock %}
 {% block content %}
     <div class="full flex flex-y flex-x">
-        <form action="{{ url_for('admin.new_employee') }}" method="post">
+        <form action="" method="post">
             {{ form.first_name(class="form-control", placeholder="First name") }}
             {{ form.last_name(class="form-control", placeholder="Last name") }}
             {{ form.username(class="form-control", placeholder="Username") }}
             {{ form.email(class="form-control", placeholder="E-mail address") }}
             
-            {{ form.submit(class="btn btn-primary", label="Create employee") }}
+            {{ form.submit(class="btn btn-primary") }}
             <a class="btn btn-danger" href="{{ url_for('admin.dashboard') }}">Cancel</a>
         </form>
     </div>

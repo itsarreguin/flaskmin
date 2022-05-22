@@ -2,7 +2,16 @@
 {% block title %}{{ super() }} | Dashboard{% endblock %}
 {% block navbar %}{{ super() }}{% endblock %}
 {% block content %}
+    <section class="container">
+        
+    </section>
     <section class="container d-grid gap-4" style="margin-top: 100px;">
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <h5 class="mb-0">{{ message }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
         <div class="row px-0">
             <section class="col-6">
                 <input type="search" class="form-control" name="" id="" placeholder="Search employees">

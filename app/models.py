@@ -21,6 +21,12 @@ class Admin(Base):
     username = Column(String(20), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
     password_hash = Column(String(100))
+    
+    def __init__(self, firstname, lastname, username, email) -> None:
+        self.first_name = firstname
+        self.last_name = lastname
+        self.username = username
+        self.email = email
 
     def __str__(self) -> str:
         return self.username

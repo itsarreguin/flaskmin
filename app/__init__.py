@@ -17,11 +17,14 @@ def main_core():
     from app.views import main
     app.register_blueprint(main.mod)
 
-    from app.views import auth
-    app.register_blueprint(auth.mod)
-
     from app.views import admin
     app.register_blueprint(admin.mod)
+
+    from app.views import auth
+    app.register_blueprint(auth.mod)
+    
+    from app.views import errors
+    app.register_blueprint(errors.mod)
 
 
     return app
