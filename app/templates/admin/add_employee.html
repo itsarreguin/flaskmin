@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} | Add new employee{% endblock title %}
-{% block navbar %}{{ super() }}{% endblock %}
+{% block title %}{{ super() }} | Add new employee{% endblock %}
+{% block navbar %}{% endblock %}
 {% block content %}
     <div class="fullview d-flex justify-content-center align-items-center">
         <section class="container d-flex justify-content-center align-items-center">
@@ -12,7 +12,7 @@
             {% endfor %}
             <div class="form-container w-500">
                 <section class="form-header"><h3>Add employee</h3></section>
-                <form action="" method="post" class="d-grid gap-4">
+                <form action="" method="post" class="d-grid gap-3">
                     {{ form.first_name(class="form-control", placeholder="First name") }}
                     {{ form.last_name(class="form-control", placeholder="Last name") }}
                     {{ form.username(class="form-control", placeholder="Username") }}
@@ -24,4 +24,4 @@
             </div>
         </section>
     </div>
-{% endblock content %}
+{% endblock %}

@@ -2,9 +2,9 @@
 {% block title %}{{ super() }} | Sign Up{% endblock %}
 {% block navbar %}{% endblock %}
 {% block content %}
-    <div class="full row">
+    <div class="fullview row">
         <section class="col-4"></section>
-        <section class="col-8 flex flex-y flex-x">
+        <section class="col-8 d-flex justify-content-center align-items-center">
             <div class="form-container w-580">
                 <section class="form-header"><h3>Admin register</h3></section>
 
@@ -19,7 +19,7 @@
                     </div>
                     {{ form.email(class="form-control", placeholder="E-mail address") }}
                     {{ form.password_hash(class="form-control", placeholder="Password") }}
-                    {{ form.password_verify(class="form-control", placeholder="Verify your password") }}
+                    {{ form.password_verify(class="form-control", placeholder="Confirm password") }}
 
                     <section class="d-grid gap-2">
                         {{ form.submit(class="btn btn-primary") }}

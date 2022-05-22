@@ -39,12 +39,12 @@
                     {% for employee in employees %}
                         <tr>
                             <td scope="row">{{ employee.id }}</td>
-                            <td>{{ employee.first_name | capitalize }}</td>
+                            <td><a class="link-info" href="">{{ employee.first_name | capitalize }}</a></td>
                             <td>{{ employee.last_name | capitalize }}</td>
                             <td>{{ employee.username }}</td>
                             <td>{{ employee.email }}</td>
                             <td>{{ employee.created_at }}</td>
-                            <td><a class="btn btn-danger" href="{{ url_for('admin.delete_employee', username=employee.username) }}">Delete</a></td>
+                            <td><a class="btn btn-sm btn-danger" href="{{ url_for('admin.delete_employee', username=employee.username) }}">Delete</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
