@@ -16,7 +16,7 @@ mod = Blueprint('auth', __name__, url_prefix='/auth')
 
 @mod.route('/signup/', methods=['GET', 'POST'])
 def signup():
-    form = SignUpForm()
+    form = SignUpForm(request.form)
     
     while current_user.is_authenticated:
         return redirect(url_for('admin.dashboard'))
