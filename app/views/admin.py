@@ -5,15 +5,22 @@ from flask import Blueprint
 from flask import request, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required, logout_user
 
-from app.models import Employee
+from app.models import Admin, Employee
 from app.forms import EmployeeForm
 from db.settings import db_session
+from app import login_manager
 
 
 mod = Blueprint('admin', __name__)
 
 
+@login_manager.user_loader
+def loader_user():
+    return db_session.query(Admin).get(int(Admin.id))
+
+
 @mod.route('/dashboard/')
+@login_required
 def dashboard():
     employees = db_session.query(Employee).order_by(Employee.created_at)
 
@@ -26,6 +33,7 @@ def dashboard_redirect():
 
 
 @mod.route('/employee/add/', methods=['GET', 'POST'])
+@login_required
 def new_employee():
     form = EmployeeForm(request.form)
     
@@ -59,11 +67,13 @@ def new_employee():
 
 
 @mod.route('/employee/<username>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit_employee(username: str):
     pass
 
 
 @mod.route('/employee/<username>/delete/')
+@login_required
 def delete_employee(username: str):
     db_session.query(Employee).filter(Employee.username == username).delete()
 

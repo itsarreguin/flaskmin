@@ -28,9 +28,9 @@ def signup():
         email = form.email.data
         password = form.password_hash.data
         
-        admin = db_session.query(Admin).first(Admin.username == username).first()
+        admin_exist = db_session.query(Admin).filter(Admin.username == username).first()
         
-        if not admin:
+        if not admin_exist:
             hashed_password = generate_password_hash(password)
 
             new_admin = Admin(
@@ -69,7 +69,8 @@ def login():
         
         if admin_exist:
             if check_password_hash(admin_exist.password_hash, password):
-                login_user(admin_exist)
+                login_user(user=admin_exist)
+
                 return redirect(url_for('admin.dashboard'))
             
             else:

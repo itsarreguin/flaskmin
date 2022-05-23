@@ -23,12 +23,21 @@ li {
     margin-bottom: 35px;
 }
 
+.w-440 {
+    max-width: 440px;
+}
+
 .w-500 {
     max-width: 500px;
 }
 
 .w-580 {
     max-width: 580px;
+}
+
+.account-container {
+    margin-top: 20px;
+    text-align: center;
 }
 
 .mr-r {

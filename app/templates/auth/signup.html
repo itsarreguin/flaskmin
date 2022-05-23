@@ -6,7 +6,13 @@
         <section class="col-4"></section>
         <section class="col-8 d-flex justify-content-center align-items-center">
             <div class="form-container w-580">
-                <section class="form-header"><h3>Admin register</h3></section>
+                <section class="form-header"><h4>Admin register</h4></section>
+                {% for message in get_flashed_messages() %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
 
                 <form class="d-grid gap-4" action="{{ url_for('auth.signup') }}" method="post">
                     <div class="input-group">
@@ -25,6 +31,10 @@
                         {{ form.submit(class="btn btn-primary") }}
                     </section>
                 </form>
+
+                <section class="account-container">
+                    <p class="mb-0">Have an account? <a class="link-primary mb-0" href="{{ url_for('auth.login') }}">Log in</a></p>
+                </section>
             </div>
         </section>
     </div>

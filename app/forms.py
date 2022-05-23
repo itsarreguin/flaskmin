@@ -1,27 +1,43 @@
 """Create forms for Flaskmin project"""
 
 from flask_wtf import Form, FlaskForm
-from wtforms import (
+from wtforms.fields import (
     StringField, EmailField, PasswordField, BooleanField, SubmitField
 )
 from wtforms.validators import DataRequired, EqualTo, Length
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField(
+        'Username', validators=[DataRequired(), Length(min=4, max=25)]
+        )
+    password = PasswordField(
+        'Password', validators=[DataRequired(), Length(min=10, max=20)]
+        )
     submit = SubmitField('Login')
 
 
 class SignUpForm(Form):
-    first_name = StringField('First name', validators=[DataRequired()])
-    last_name = StringField('Second name', validators=[DataRequired()])
-    username = StringField('Username', validators=[DataRequired()])
-    email = EmailField('Your e-mail address', validators=[DataRequired()])
+    first_name = StringField(
+        'First name', validators=[DataRequired(), Length(min=4, max=25)]
+        )
+    last_name = StringField(
+        'Last name', validators=[DataRequired(), Length(min=4, max=25)]
+        )
+    username = StringField(
+        'Username', validators=[DataRequired(), Length(min=1, max=20)]
+        )
+    email = EmailField(
+        'Your e-mail address', validators=[DataRequired(), Length(min=8, max=60)]
+        )
     password_hash = PasswordField('Create a password',
-        validators=[DataRequired(), EqualTo('password_verify', message='Passwords do not match')])
+        validators=[
+            DataRequired(), Length(min=10, max=20),
+            EqualTo('password_verify', message='Passwords do not match')
+            ]
+        )
     password_verify = PasswordField(
-        'Confirm your password', validators=[DataRequired()]
+        'Confirm your password', validators=[DataRequired(), Length(min=10, max=20)]
     )
     submit = SubmitField('Register')
 
@@ -31,8 +47,16 @@ class AdminProfile(Form):
 
 
 class EmployeeForm(Form):
-    first_name = StringField('First name', validators=[DataRequired()])
-    last_name = StringField('Last name', validators=[DataRequired()])
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email address', validators=[DataRequired()])
+    first_name = StringField(
+        'First name', validators=[DataRequired(), Length(min=4, max=25)]
+        )
+    last_name = StringField(
+        'Last name', validators=[DataRequired(), Length(min=4, max=25)]
+        )
+    username = StringField(
+        'Username', validators=[DataRequired(), Length(min=1, max=20)]
+        )
+    email = StringField(
+        'Email address', validators=[DataRequired(), Length(min=8, max=60)]
+        )
     submit = SubmitField(label='Add employee')

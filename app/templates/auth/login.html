@@ -3,8 +3,14 @@
 {% block navbar %}{% endblock %}
 {% block content %}
     <div class="fullview d-flex justify-content-center align-items-center">
-        <section class="form-container w-500">
-            <div class="form-header"><h3>Admin Login</h3></div>
+        <section class="form-container w-440">
+            <div class="form-header"><h4>Admin Login</h4></div>
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
 
             <form class="d-grid gap-4" action="{{ url_for('auth.login') }}" method="post">
                 {{ form.username(class="form-control", placeholder="Username") }}
@@ -15,6 +21,10 @@
                     {{ form.submit(class="btn btn-primary") }}
                 </div>
             </form>
+
+            <div class="account-container">
+                <p class="mb-0">Don't have an account? <a class="link-primary mb-0" href="{{ url_for('auth.signup') }}">Sign Up</a></p>
+            </div>
         </section>
     </div>
 {% endblock %}
