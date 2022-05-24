@@ -20,7 +20,7 @@ def loader_user():
 
 
 @mod.route('/dashboard/')
-@login_required
+# @login_required
 def dashboard():
     employees = db_session.query(Employee).order_by(Employee.created_at)
 
@@ -33,7 +33,7 @@ def dashboard_redirect():
 
 
 @mod.route('/employee/add/', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def new_employee():
     form = EmployeeForm(request.form)
     
@@ -47,8 +47,8 @@ def new_employee():
         
         if not employee:
             new_employee = Employee(
-                first_name = first_name,
-                last_name = last_name,
+                firstname = first_name,
+                lastname = last_name,
                 username = username,
                 email = email
             )

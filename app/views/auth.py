@@ -57,20 +57,19 @@ def signup():
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
+    username = form.username.data
+    password = form.password.data
     
-    while current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard'))
+    # while current_user.is_authenticated:
+    #     return redirect(url_for('admin.dashboard'))
     
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        
         admin_exist = db_session.query(Admin).filter(Admin.username == username).first()
         
         if admin_exist:
             if check_password_hash(admin_exist.password_hash, password):
-                login_user(user=admin_exist)
-
+                login_user(admin_exist)
                 return redirect(url_for('admin.dashboard'))
             
             else:

@@ -27,10 +27,21 @@ class Admin(Base):
         self.last_name = lastname
         self.username = username
         self.email = email
-        self.__password = password
+        self.password_hash = password
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return self.username
+    
+    @property
+    def password(self):
+        raise AttributeError('Password is not a readable attribute')
+    
+    @password.setter
+    def password(self, password: str):
+        self.password_hash = generate_password_hash(password)
+    
+    def confirm_password(self, password: str):
+        return check_password_hash(self.password_hash, password)
 
 
 class Employee(Base):
@@ -44,10 +55,10 @@ class Employee(Base):
     created_at = Column(DateTime(), default=datetime.utcnow())
     
     def __init__(self, firstname, lastname, username, email) -> None:
-        self.firstname = firstname
-        self.lastname = lastname
+        self.first_name = firstname
+        self.last_name = lastname
         self.username = username
         self.email = email
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return self.first_name
