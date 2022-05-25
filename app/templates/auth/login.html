@@ -13,15 +13,13 @@
             {% endfor %}
 
             <form class="d-grid gap-4" action="" method="post">
+                {{ form.csrf_token }}
                 {{ form.username(class="form-control", placeholder="Username") }}
-        
                 {{ form.password(class="form-control", placeholder="Password") }}
-        
                 <div class="d-grid gap-2">
                     {{ form.submit(class="btn btn-primary") }}
                 </div>
             </form>
-
             <div class="account-container">
                 <p class="mb-0">Don't have an account? <a class="link-primary mb-0" href="{{ url_for('auth.signup') }}">Sign Up</a></p>
             </div>

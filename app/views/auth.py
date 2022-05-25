@@ -18,9 +18,6 @@ mod = Blueprint('auth', __name__, url_prefix='/auth')
 def signup():
     form = SignUpForm(request.form)
     
-    while current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard'))
-    
     if request.method == 'POST' and form.validate():
         first_name = form.first_name.data
         last_name = form.last_name.data
@@ -51,23 +48,37 @@ def signup():
         else:
             flash('This admin already exist')
     
+    while current_user.is_authenticated:
+        return redirect(url_for('admin.dashboard'))
+    
     return render_template('auth/signup.html', form=form)
 
 
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
-    form = LoginForm(request.form)
-    
-    if request.method == 'POST' and form.validate():
-        username = form.username.data
-        password = form.password.data
-        
-        admin_exist = db_session.query(Admin).filter(Admin.username == username).first()
-        
-        if admin_exist:
-            if check_password_hash(admin_exist.password_hash, password):
-                login_user(admin_exist)
+    form = LoginForm()
+
+    while form.validate_on_submit():
+        admin = db_session.query(Admin).filter(
+            Admin.username == form.username.data
+            ).first()
+
+        while admin:
+            if check_password_hash(admin.password_hash, form.password.data):
+                login_user(admin)
+                flash(f'Welcome back {admin.username}')
 
                 return redirect(url_for('admin.dashboard'))
+            
+            else:
+                flash('Wrong password')
+                return redirect(url_for('auth.login'))
+
+        if not admin:
+            flash('This admin doesn\'t exist. Please sign up')
+            return redirect(url_for('auth.signup'))
+
+    while current_user.is_authenticated:
+        return redirect(url_for('admin.dashboard'))
 
     return render_template('auth/login.html', form=form)

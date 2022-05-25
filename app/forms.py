@@ -1,13 +1,13 @@
 """Create forms for Flaskmin project"""
 
-from flask_wtf import Form
+from flask_wtf import Form, FlaskForm
 from wtforms.fields import (
     StringField, EmailField, PasswordField, BooleanField, SubmitField
 )
 from wtforms.validators import DataRequired, EqualTo, Length
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     username = StringField(
         'Username', validators=[DataRequired(), Length(min=4, max=25)]
         )
@@ -17,7 +17,7 @@ class LoginForm(Form):
     submit = SubmitField('Login')
 
 
-class SignUpForm(Form):
+class SignUpForm(FlaskForm):
     first_name = StringField(
         'First name', validators=[DataRequired(), Length(min=4, max=25)]
         )
@@ -46,7 +46,7 @@ class AdminProfile(Form):
     pass
 
 
-class EmployeeForm(Form):
+class EmployeeForm(FlaskForm):
     first_name = StringField(
         'First name', validators=[DataRequired(), Length(min=4, max=25)]
         )

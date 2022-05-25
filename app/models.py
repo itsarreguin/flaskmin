@@ -9,10 +9,12 @@ from werkzeug.security import (generate_password_hash,
     check_password_hash
     )
 
+from flask_login import UserMixin
+
 from db.engine import Base
 
 
-class Admin(Base):
+class Admin(Base, UserMixin):
     __tablename__ = 'admins'
     
     id = Column(Integer, primary_key=True)

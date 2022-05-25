@@ -2,11 +2,13 @@
 
 from flask import Flask
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 
 from app.config import DevConfig
 from db.settings import db_session
 
 
+csrf = CSRFProtect()
 login_manager = LoginManager()
 
 
@@ -15,6 +17,7 @@ def main_core():
 
     app.config.from_object(DevConfig)
     
+    csrf.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 

@@ -12,7 +12,8 @@
             {% endfor %}
             <div class="form-container w-500">
                 <section class="form-header"><h3>Edit employee</h3></section>
-                <form action="" method="post" class="d-grid gap-3">
+                <form method="post" class="d-grid gap-3">
+                    {{ form.csrf_token }}
                     {{ form.first_name(class="form-control", value=employee.first_name, placeholder="First name") }}
                     {{ form.last_name(class="form-control", value=employee.last_name, placeholder="Last name") }}
                     {{ form.email(class="form-control", value=employee.email, placeholder="E-mail address") }}

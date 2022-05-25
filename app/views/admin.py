@@ -14,8 +14,8 @@ mod = Blueprint('admin', __name__)
 
 
 @login_manager.user_loader
-def loader_user():
-    return db_session.query(Admin).filter(Admin.id).first()
+def loader_user(admin_id: int):
+    return db_session.query(Admin).filter(Admin.id == int(admin_id)).first()
 
 
 @mod.route('/dashboard/')
@@ -81,7 +81,7 @@ def edit_employee(username: str):
             db_session.add(employee)
             db_session.commit()
             
-            flash(f'{employee.username} updated succesfully')
+            flash(f'{employee.username} updated successfully')
             
             return redirect(url_for('admin.dashboard'))
 
