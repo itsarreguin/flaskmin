@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ super() }} | Add new employee{% endblock %}
+{% block title %}{{ super() }} | {{ employee.username }}{% endblock %}
 {% block navbar %}{% endblock %}
 {% block content %}
     <div class="fullview d-flex justify-content-center align-items-center">
@@ -11,14 +11,14 @@
                 </div>
             {% endfor %}
             <div class="form-container w-500">
-                <section class="form-header"><h3>Add employee</h3></section>
+                <section class="form-header"><h3>Edit employee</h3></section>
                 <form action="" method="post" class="d-grid gap-3">
-                    {{ form.first_name(class="form-control", placeholder="First name") }}
-                    {{ form.last_name(class="form-control", placeholder="Last name") }}
-                    {{ form.email(class="form-control", placeholder="E-mail address") }}
-                    {{ form.username(class="form-control", placeholder="Username") }}
+                    {{ form.first_name(class="form-control", value=employee.first_name, placeholder="First name") }}
+                    {{ form.last_name(class="form-control", value=employee.last_name, placeholder="Last name") }}
+                    {{ form.email(class="form-control", value=employee.email, placeholder="E-mail address") }}
+                    {{ form.username(class="form-control", value=employee.username, placeholder="Username") }}
                     
-                    {{ form.create(class="btn btn-primary") }}
+                    {{ form.update(class="btn btn-primary") }}
                     <a class="btn btn-secondary" href="{{ url_for('admin.dashboard') }}">Cancel</a>
                 </form>
             </div>

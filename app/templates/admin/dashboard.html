@@ -39,7 +39,11 @@
                     {% for employee in employees %}
                         <tr>
                             <td scope="row">{{ employee.id }}</td>
-                            <td><a class="link-info" href="">{{ employee.first_name | capitalize }}</a></td>
+                            <td>
+                                <a class="link-info" href="{{ url_for('admin.edit_employee', username=employee.username) }}">
+                                    {{ employee.first_name | capitalize }}
+                                </a>
+                            </td>
                             <td>{{ employee.last_name | capitalize }}</td>
                             <td>{{ employee.username }}</td>
                             <td>{{ employee.email }}</td>

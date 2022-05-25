@@ -1,6 +1,5 @@
 """All views for administrate users"""
 
-from hashlib import new
 from flask import Blueprint
 from flask import request, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required, logout_user
@@ -16,11 +15,11 @@ mod = Blueprint('admin', __name__)
 
 @login_manager.user_loader
 def loader_user():
-    return db_session.query(Admin).get(int(Admin.id))
+    return db_session.query(Admin).filter(Admin.id).first()
 
 
 @mod.route('/dashboard/')
-# @login_required
+@login_required
 def dashboard():
     employees = db_session.query(Employee).order_by(Employee.created_at)
 
@@ -33,7 +32,7 @@ def dashboard_redirect():
 
 
 @mod.route('/employee/add/', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def new_employee():
     form = EmployeeForm(request.form)
     
@@ -69,14 +68,36 @@ def new_employee():
 @mod.route('/employee/<username>/edit/', methods=['GET', 'POST'])
 @login_required
 def edit_employee(username: str):
-    pass
+    form = EmployeeForm(request.form)
+    employee = db_session.query(Employee).filter(Employee.username == username).one()
+    
+    if request.method == 'POST':
+        employee.first_name = request.form['first_name']
+        employee.last_name = request.form['last_name']
+        employee.username = request.form['username']
+        employee.email = request.form['email']
+        
+        try:
+            db_session.add(employee)
+            db_session.commit()
+            
+            flash(f'{employee.username} updated succesfully')
+            
+            return redirect(url_for('admin.dashboard'))
+
+        except:
+           flash('Update error. Try again')
+        
+        finally:
+            db_session.close()
+    
+    return render_template('admin/edit_employee.html', form=form, employee=employee)
 
 
 @mod.route('/employee/<username>/delete/')
 @login_required
 def delete_employee(username: str):
     db_session.query(Employee).filter(Employee.username == username).delete()
-
     db_session.commit()
 
     flash(f'{username.capitalize()} was deleted correctly')

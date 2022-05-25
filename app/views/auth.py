@@ -31,7 +31,7 @@ def signup():
         admin_exist = db_session.query(Admin).filter(Admin.username == username).first()
         
         if not admin_exist:
-            hashed_password = generate_password_hash(password)
+            hashed_password = generate_password_hash(password, method='sha256')
 
             new_admin = Admin(
                 firstname = first_name,
@@ -56,25 +56,18 @@ def signup():
 
 @mod.route('/login/', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-
-    username = form.username.data
-    password = form.password.data
+    form = LoginForm(request.form)
     
-    # while current_user.is_authenticated:
-    #     return redirect(url_for('admin.dashboard'))
-    
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate():
+        username = form.username.data
+        password = form.password.data
+        
         admin_exist = db_session.query(Admin).filter(Admin.username == username).first()
         
         if admin_exist:
             if check_password_hash(admin_exist.password_hash, password):
                 login_user(admin_exist)
+
                 return redirect(url_for('admin.dashboard'))
-            
-            else:
-                flash('Wrong password')
-        else:
-            flash('This admin doesn\'t exist')
-    
+
     return render_template('auth/login.html', form=form)
