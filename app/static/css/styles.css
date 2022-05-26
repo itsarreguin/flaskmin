@@ -51,4 +51,22 @@ li {
     .table-container {
         overflow-x: auto;
     }
+    .form-container {
+        width: 100%;
+        padding: 0px 4%;
+        border: none;
+        border-radius: 0px;
+        background: #FFFFFF;
+    }
+    .w-440 {
+        max-width: 100%;
+    }
+    
+    .w-500 {
+        max-width: 100%;
+    }
+    
+    .w-580 {
+        max-width: 100%;
+    }
 }
