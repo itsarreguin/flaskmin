@@ -59,13 +59,15 @@ def login():
     form = LoginForm()
 
     while form.validate_on_submit():
-        admin = db_session.query(Admin).filter(
-            Admin.username == form.username.data
-            ).first()
+        username = form.username.data
+        password = form.password.data
+        remember = True if request.form.get('remember') else False
+
+        admin = db_session.query(Admin).filter(Admin.username == username).first()
 
         while admin:
-            if check_password_hash(admin.password_hash, form.password.data):
-                login_user(admin)
+            if check_password_hash(admin.password_hash, password):
+                login_user(admin, remember=remember)
                 flash(f'Welcome back {admin.username}')
 
                 return redirect(url_for('admin.dashboard'))

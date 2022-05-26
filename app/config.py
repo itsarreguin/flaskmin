@@ -1,20 +1,18 @@
-from email import charset
-import os
 import string, random
 
 
+CHARS = ''.join([string.ascii_letters, string.digits, string.punctuation]).replace('\'', '').replace('"', '').replace('\\', '')
+
+GENERATE_STRING = ''.join([random.SystemRandom().choice(CHARS) for _ in range(100)])
+
+
 class DevConfig(object):
-    SECRET_KEY = '/*(Rhg84/651|]+*/[8a-+GHas8654]'
     ENV = 'development'
+    SECRET_KEY = '/*(Rhg84/651|]+*/[8a-+GHas8654]'
     DEBUG = True
 
 
-chars = ''.join(
-    [string.ascii_letters, string.digits, string.punctuation]
-    ).replace('\'', '').replace('"', '').replace('\\', '')
-
 class ProductionConfig(object):
-
-    SECRET_KEY = ''.join([random.SystemRandom().choice(chars) for _ in range(100)])
     ENV = 'production'
+    SECRET_KEY = GENERATE_STRING
     DEBUG = False
