@@ -1,15 +1,18 @@
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+from decouple import config
+
 from db.engine import postgresql, Base
 
 
 engine = postgresql(
-    username='itsarreguin',
-    password='adreno',
-    host='localhost',
-    port=5432,
-    database='flaskmin'
+    username=config('POSTGRESQL_USER'),
+    password=config('POSTGRESQL_PASSWORD'),
+    host=config('POSTGRESQL_HOST'),
+    port=config('POSTGRESQL_PORT'),
+    database=config('POSTGRESQL_DB')
 )
+
 
 db_session = scoped_session(
     sessionmaker(
@@ -22,15 +25,12 @@ Base.query = db_session.query_property()
 
 
 def init_db():
-    from app import models
     Base.metadata.create_all(bind=engine)
 
 
 def cls_db():
-    from app import models
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.clear()
 
 
 def drop_db():
-    from app import models
     Base.metadata.drop_all(bind=engine)

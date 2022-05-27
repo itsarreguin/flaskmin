@@ -23,6 +23,8 @@ class Admin(Base, UserMixin):
     username = Column(String(20), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
     password_hash = Column(String(100))
+
+    admin = relationship('Employee', backref='admin')
     
     def __init__(self, firstname, lastname, username, email, password) -> None:
         self.first_name = firstname
@@ -55,6 +57,9 @@ class Employee(Base):
     username = Column(String(20), nullable=False, unique=True)
     email = Column(String(100), nullable=False, unique=True)
     created_at = Column(DateTime(), default=datetime.utcnow())
+    
+    # One to many relationship
+    admin_id = Column(Integer, ForeignKey('admins.id'))
     
     def __init__(self, firstname, lastname, username, email) -> None:
         self.first_name = firstname

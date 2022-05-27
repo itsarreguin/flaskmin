@@ -20,10 +20,10 @@ class LoginForm(FlaskForm):
 
 class SignUpForm(FlaskForm):
     first_name = StringField(
-        'First name', validators=[DataRequired(), Length(min=4, max=25)]
+        'First name', validators=[DataRequired(), Length(min=1, max=25)]
         )
     last_name = StringField(
-        'Last name', validators=[DataRequired(), Length(min=4, max=25)]
+        'Last name', validators=[DataRequired(), Length(min=1, max=25)]
         )
     username = StringField(
         'Username', validators=[DataRequired(), Length(min=1, max=20)]
@@ -49,10 +49,10 @@ class AdminProfile(Form):
 
 class EmployeeForm(FlaskForm):
     first_name = StringField(
-        'First name', validators=[DataRequired(), Length(min=4, max=25)]
+        'First name', validators=[DataRequired(), Length(min=1, max=25)]
         )
     last_name = StringField(
-        'Last name', validators=[DataRequired(), Length(min=4, max=25)]
+        'Last name', validators=[DataRequired(), Length(min=1, max=25)]
         )
     username = StringField(
         'Username', validators=[DataRequired(), Length(min=1, max=20)]
